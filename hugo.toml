@@ -3,6 +3,23 @@ languageCode = 'en-us'
 title = "Francisco Mendonca's Blog"
 theme = 'PaperMod'
 
+
+[params]
+env = "production"
+description = "Francisco's blog about stuff..."
+author = "Francisco Mendonca"
+defaultTheme = "auto"
+ShowReadingTime = true
+displayFullLangName = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowRssButtonInSectionTermList = true
+ShowAllPagesInArchive = true
+ShowPageNums = true
+ShowToc = true
+
+
 [params.homeInfoParams]
 Title = "Francisco Mendonca"
 Content = "Can be Info, links, about..."
@@ -10,4 +27,23 @@ Content = "Can be Info, links, about..."
 [[params.socialIcons]]
 name = "GitHub"
 url = "https://github.com/QuietSwami"
+
+
+[outputs]
+home = [ "HTML", "RSS", "JSON" ]
+
+[[menu.main]]
+name = "Archive"
+url = "archives"
+weight = 5
+
+[[menu.main]]
+name = "Search"
+url = "search/"
+weight = 10
+
+[[menu.main]]
+name = "Tags"
+url = "tags/"
+weight = 10
 
