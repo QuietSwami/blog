@@ -1,0 +1,7 @@
+<!-- layouts/shortcodes/code.html -->
+{{ $path := .Get 0 | safeHTML }}
+{{ $lang := .Get 1 | default "plaintext" }}
+{{ $filepath := print "static/snippets/" $path }}
+{{ $code := readFile $filepath }}
+{{ $highlightedCode := highlight $code $lang "" }}
+<pre>{{ $highlightedCode | safeHTML }}</pre>

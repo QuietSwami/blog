@@ -10,22 +10,9 @@ Python is renowned for its exceptional versatility, making it ideal for diverse 
 ## Understanding Nested Functions in Python
 Before diving into decorators, it's helpful to understand nested functions in Python. A nested function is defined within another function, and it can access variables from the enclosing scope. Here’s an example to illustrate this:
 
-```python
-def outer(x):
-    def inner(y):
-        return x + y
-    return inner
-```
+{{< code "nested_function_example.py" "python" >}}
 
 In the example above, inner is a nested function that adds a given number y to x, which is a parameter of the outer function outer. The nested function inner is only created and accessible within the outer function, not outside of it.
-
-Here's how to use these functions:
-
-```python
-adding = outer(9) # At this moment, the outer function is initialized with the argument 5.
-result = adding(10) # now we initilize the inner function with argument 6
-print(result) # Result: 19
-```
 
 Nested functions are valuable for several reasons:
 
@@ -39,7 +26,6 @@ Nested functions are valuable for several reasons:
 Moving from nested functions to decorators, a decorator in Python is essentially a function that takes another function and extends its behavior without permanently modifying it. This is a fundamental concept in Python, especially useful in scenarios like logging, access control, memoization, and more.
 
 ```python
-
 def my_decorator(func):
     def wrapper():
         print("Something happens before func execution")

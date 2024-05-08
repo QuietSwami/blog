@@ -28,6 +28,12 @@ Content = "Can be Info, links, about..."
 name = "GitHub"
 url = "https://github.com/QuietSwami"
 
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false  # Set to false to disable guessing language
+    highlightLines = true
+    noClasses = false   # Set to false to use CSS classes for styling
 
 [outputs]
 home = [ "HTML", "RSS", "JSON" ]
