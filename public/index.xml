@@ -6,14 +6,23 @@
     <description>Recent content on Francisco Mendonca&#39;s Blog</description>
     <generator>Hugo -- 0.125.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Apr 2024 11:54:29 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2024 21:21:51 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Decorators in Python</title>
+      <link>http://localhost:1313/posts/pythondecorators/</link>
+      <pubDate>Mon, 06 May 2024 21:21:51 +0200</pubDate>
+      <guid>http://localhost:1313/posts/pythondecorators/</guid>
+      <description>Python is renowned for its exceptional versatility, making it ideal for diverse applications, from web development to data science. In this blog post, we&amp;rsquo;re diving into a powerful feature known as Decorators. Although I had not explored Decorators for quite some time, I decided it was finally time to thoroughly understand and master them.
+Understanding Nested Functions in Python Before diving into decorators, it&amp;rsquo;s helpful to understand nested functions in Python.</description>
+    </item>
     <item>
       <title>Introduction</title>
       <link>http://localhost:1313/posts/introduction/</link>
       <pubDate>Wed, 24 Apr 2024 11:54:29 +0200</pubDate>
       <guid>http://localhost:1313/posts/introduction/</guid>
-      <description></description>
+      <description>After one year in my PhD, I accumulated a lot of notes, both hand-written or written using tools like Obsidian, Notion, or similar. I&amp;rsquo;ve loss track of most notes I took, and do not actively keep track of most. I thought a blog was exactly what I needed, somewhere to discuss more in depth some of the work I&amp;rsquo;m developing, and other projects I come across.
+I hope this blog comes to serve some use to at least me - a place where I can develop further certain ideas, skills, and other tid bits I might find interesting.</description>
     </item>
   </channel>
 </rss>
