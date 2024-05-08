@@ -1,6 +1,7 @@
 +++
 title = 'Introduction'
 date = 2024-04-24T11:54:29+02:00
+draft = false
 +++
 
 After one year in my PhD, I accumulated a lot of notes, both hand-written or written using tools like Obsidian, Notion, or similar. I've loss track of most notes I took, and do not actively keep track of most. I thought a blog was exactly what I needed, somewhere to discuss more in depth some of the work I'm developing, and other projects I come across.

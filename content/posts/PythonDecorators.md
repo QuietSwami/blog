@@ -1,6 +1,7 @@
 +++
 title = 'Decorators in Python'
 date = 2024-05-06T21:21:51+02:00
+draft = false
 +++
 
 Python is renowned for its exceptional versatility, making it ideal for diverse applications, from web development to data science. In this blog post, we're diving into a powerful feature known as Decorators. Although I had not explored Decorators for quite some time, I decided it was finally time to thoroughly understand and master them.
@@ -168,6 +169,7 @@ def my_function():
     pass
 ```
 
+### Decorators as Performance Measurment
 Another use case is the usage of Decorators as performance measurement. A decorator can be developed to add timing code that records how long a functions takes to run. 
 
 ```python 
@@ -189,6 +191,7 @@ def my_function():
     pass
 
 ```
+### Decorators for Access Control
 
 Certain function will require a finer access control and authentication policies. A decorator can be used to add this to certain function, ensuring that only authorized users are able to execute ceratin functionalities. This is common in web frameworks where ceratin routes or actions are restricted to logged-in users or users with specific roles.
 
@@ -244,6 +247,8 @@ except Exception as e:
     print(e)
 ```
 
+### Input Validation with Decorators
+
 Another useful use-case is the use of decorators as input validating, which can be used to check the arguments apssed to a function before being executed. This helps maintaining clean and error-free data processing within functions
 
 ```python
@@ -280,6 +285,8 @@ except ValueError as e:
     print(e)
 ```
 
+### Decorators as Caching Mechanisms
+
 Decorators can also be leverage as abastract caching mechanism. Any function that is decorated with this caching function can have their results cached before being returned. The following example displays how this caching mechanism can be used with a fibonnaci function. Before the decorated function is executed, the decorator retrieves any data that is cached and passes to the fibonnaci function.
 
 ```python
@@ -305,6 +312,7 @@ def fibonacci(n):
 print(f"Fibonacci 10: {fibonacci(10)}")  # This should compute and then cache all values up to Fib(10)
 print(f"Fibonacci 20: {fibonacci(20)}")  # This should use cached values for Fib(0) to Fib(10) and compute the rest
 ```
+### Enrinching Metadata with Decorators
 
 Decorators could be used to enrich metadata by appending additional information to the output of a function. The following example displays a nested decorator, which enriches the output of the decorated function.
 
@@ -331,7 +339,7 @@ def calculate_area(length, width):
 area = calculate_area(5, 10)
 print(area)  # Output will be a dictionary with the area and the units
 ```
-
+### Event Handling with Decorators
 Flask uses decorators to handle events. When a request is done to a specific Flask endpoint, Flask treats the HTTP request and triggers an action described in the decorated function. Then, when the function finishes execution, it takes the output and transforms it into a HTTP response.
 
 ```python
@@ -408,6 +416,8 @@ obj = SomeClass()
 obj.method_one()
 ```
 
+### Ensure Classes Adhere to Interface 
+
 Furthermore, decorators can be used to ensure that certain classes adhere to a defined interface or abstract base class without using inheritance. This is particularly useful in large systems adhering to strict architectural patterns where specific methods must be implemented by multiple classes:
 
 ```python
@@ -427,6 +437,8 @@ class Processor:
 
 # This will raise a TypeError indicating the 'validate' method is missing.
 ```
+
+### Singletons 
 
 Finally, decorators can be used to enforce the singleton pattern, limiting a class to a single instance throughout the lifetime of a program. This is commonly used in cases you need a controlled access point to a resrouce, such as a database connection or a configuration manager.
 
