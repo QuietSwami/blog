@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Generators and Iterators | Francisco Mendonca&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications.">
+<meta name="author" content="Francisco Mendonca">
+<link rel="canonical" href="http://localhost:1313/posts/generators-and-iterators/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/generators-and-iterators/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+  
+
+<meta property="og:title" content="Generators and Iterators" />
+<meta property="og:description" content="Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/generators-and-iterators/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-20T16:35:06+02:00" />
+<meta property="article:modified_time" content="2024-05-20T16:35:06+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Generators and Iterators"/>
+<meta name="twitter:description" content="Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Generators and Iterators",
+      "item": "http://localhost:1313/posts/generators-and-iterators/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Generators and Iterators",
+  "name": "Generators and Iterators",
+  "description": "Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications.\nAn iterator is an object that enables a programmer to traverse through all the elements of a collection, such as lists, tuples, dictionaries, and sets. This object adheres to the iterator protocol, which requires it to implement two specific methods: iter() and next(). The iter() method returns the iterator object itself and is used in conjunction with loops, like for and while, to repeatedly fetch the next element. The next() method, on the other hand, provides the next element of the collection and raises a StopIteration exception when there are no more elements to return. This mechanism underlies many of Python’s built-in functions and constructs, such as loops and comprehensions, allowing them to operate transparently over collections of data.\nGenerators are a type of iterable in Python that are used to generate a sequence of values. Unlike regular functions that return a single value and terminate, generators yield multiple values sequentially, pausing after each yield and resuming from where they left off. This is accomplished using the yield keyword. Generators are particularly useful for creating efficient, clean code, especially when dealing with large data sets or streams, as they provide values on demand and consume memory only when generating values. By maintaining state in local variables and control flow, generators facilitate complex computations without sacrificing readability or efficiency of the code. Essentially, they allow programmers to write a function that can send back a value and later resume to pick up where it left off.\nOverview of iter() and next() functions The iter() and next() functions are fundamental to the functionality of iterators in Python, facilitating the process of iterating over iterable objects such as lists, tuples, and dictionaries. Understanding how these functions operate is key to leveraging Python’s iteration capabilities more effectively.\niter() Function The iter() function is used to obtain an iterator from an iterable object. An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a loop. Common iterables include all types of collections, such as lists, tuples, and dictionaries. To make an object iterable, it typically needs to implement the __iter__() method, which returns an iterator object. This iterator object then processes the elements of the iterable one at a time.\nWhen iter(object) is called, Python internally calls object.__iter__() and returns an iterator for that object. If the object does not implement __iter__() but has a __getitem__() method, Python creates an iterator that attempts to fetch elements sequentially starting from index 0, raising an IndexError when no more elements are available.\nnext() Function Once an iterator is obtained using iter(), the next() function is used to sequentially access elements from the iterator. Calling next(iterator) internally invokes the iterator’s __next__() method, which returns the next available item from the iterable. If no more elements are available, it raises the StopIteration exception, signaling that the iteration is complete.\nThe use of next() is essential in low-level operations where control over the iteration process is required. This function allows developers to manually control the iteration, fetching the next element only when needed. This is particularly useful in scenarios where the iteration may need to be paused, altered, or conditionally advanced.\nPractical Usage Together, iter() and next() offer a powerful mechanism for custom iteration without the need for explicit loop constructs like for or while. This can lead to more expressive, efficient, and readable code, especially in situations involving advanced iteration patterns or when integrating with other Python features like generators and coroutines.\nBy using these functions, Python programmers can create highly efficient and lazy evaluations of potentially large datasets, manage streams of data in real-time, or implement custom iteration logic that goes beyond traditional loop constructs. Thus, understanding and using iter() and next() not only enriches one’s grasp of Python’s iteration model but also opens up possibilities for writing more pythonic and performance-oriented code.\nDeep Dive into Iterators One of the key features of iterators is their ability to maintain state. When you create an iterator, it internally keeps track of its position within the iterable. Each call to next() advances the position and returns the corresponding element. This statefulness allows iterators to handle large datasets efficiently, as they only process elements on demand and do not require the entire dataset to be loaded into memory.\nIterators are designed to be lazy, meaning they only compute and retrieve elements as they are needed. This on-demand way of fetching items makes iterators particularly useful for working with large datasets or data streams where you don’t want to consume resources for the entire data at once.\nCreating Custom Iterators Creating custom iterators can be very beneficial for handling specific types of data processing or implementing complex iteration logic. Here are some important use-cases for custom iterators in Python, with implementation examples for each.\n1. Iterating Over Infinite Sequences One common use-case is to generate infinite sequences, which can be particularly useful for generating an endless supply of data on-demand.\nclass InfiniteCounter: def __init__(self, start=0): self.current = start def __iter__(self): return self def __next__(self): current_value = self.current self.current += 1 return current_value # Usage: counter = InfiniteCounter(10) for num in counter: if num \u003e 20: break print(num) This iterator starts counting from the specified number and increments indefinitely until the loop is manually stopped.\n2. Accessing Tree-like Data Structure Navigating complex data structures, like trees, can benefit from custom iterators that yield elements in a specified traversal order.\nclass TreeNode: def __init__(self, key): self.left = None self.right = None self.val = key class BinaryTree: def __init__(self, root): self.root = root def __iter__(self): return self.in_order_traversal(self.root) def in_order_traversal(self, node): if node: yield from self.in_order_traversal(node.left) yield node.val yield from self.in_order_traversal(node.right) # Usage: root = TreeNode(1) root.left = TreeNode(2) root.right = TreeNode(3) root.left.left = TreeNode(4) root.left.right = TreeNode(5) tree = BinaryTree(root) for value in tree: print(value) This example yields nodes’ values in in-order (left-root-right) sequence.\n3. Reading Large Files Line by Line Reading large files efficiently without loading the entire file into memory can be achieved with a custom iterator.\nclass FileIterator: def __init__(self, filepath): self.filepath = filepath def __iter__(self): self.file = open(self.filepath, 'r') return self def __next__(self): line = self.file.readline() if line == '': self.file.close() raise StopIteration return line.strip() # Usage: file_iter = FileIterator('example.txt') for line in file_iter: print(line) This iterator reads a file line by line, making it ideal for processing large text files.\n4. Cycling Through a Collection Cycling through a list or any collection repeatedly can be useful for simulations or games.\nclass Cycle: def __init__(self, data): self.data = data self.index = 0 def __iter__(self): return self def __next__(self): if not self.data: raise StopIteration result = self.data[self.index % len(self.data)] self.index += 1 return result # Usage: cycler = Cycle([1, 2, 3]) for _ in range(10): print(next(cycler), end=' ') # Prints: 1 2 3 1 2 3 1 2 3 1 This iterator repeats the elements in the list indefinitely.\nThese examples showcase how custom iterators can be tailored to fit specific needs, enhancing the functionality and efficiency of Python applications.\nPython’s built-in iterators Common Uses Understanding Generators Writing Generator Functions Generator Expressions ",
+  "wordCount" : "1311",
+  "inLanguage": "en",
+  "datePublished": "2024-05-20T16:35:06+02:00",
+  "dateModified": "2024-05-20T16:35:06+02:00",
+  "author":{
+    "@type": "Person",
+    "name": "Francisco Mendonca"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/generators-and-iterators/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Francisco Mendonca's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Francisco Mendonca&#39;s Blog (Alt + H)">Francisco Mendonca&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Generators and Iterators
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta"><span title='2024-05-20 16:35:06 +0200 CEST'>May 20, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Francisco Mendonca
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#overview-of-iter-and-next-functions" aria-label="Overview of iter() and next() functions">Overview of iter() and next() functions</a><ul>
+                        
+                <li>
+                    <a href="#iter-function" aria-label="iter() Function">iter() Function</a></li>
+                <li>
+                    <a href="#next-function" aria-label="next() Function">next() Function</a></li>
+                <li>
+                    <a href="#practical-usage" aria-label="Practical Usage">Practical Usage</a></li></ul>
+                </li>
+                <li>
+                    <a href="#deep-dive-into-iterators" aria-label="Deep Dive into Iterators">Deep Dive into Iterators</a><ul>
+                        
+                <li>
+                    <a href="#creating-custom-iterators" aria-label="Creating Custom Iterators">Creating Custom Iterators</a><ul>
+                        
+                <li>
+                    <a href="#1-iterating-over-infinite-sequences" aria-label="1. Iterating Over Infinite Sequences">1. Iterating Over Infinite Sequences</a></li>
+                <li>
+                    <a href="#2-accessing-tree-like-data-structure" aria-label="2. Accessing Tree-like Data Structure">2. Accessing Tree-like Data Structure</a></li>
+                <li>
+                    <a href="#3-reading-large-files-line-by-line" aria-label="3. Reading Large Files Line by Line">3. Reading Large Files Line by Line</a></li>
+                <li>
+                    <a href="#4-cycling-through-a-collection" aria-label="4. Cycling Through a Collection">4. Cycling Through a Collection</a></li></ul>
+                </li>
+                <li>
+                    <a href="#pythons-built-in-iterators" aria-label="Python&rsquo;s built-in iterators">Python&rsquo;s built-in iterators</a></li>
+                <li>
+                    <a href="#common-uses" aria-label="Common Uses">Common Uses</a></li></ul>
+                </li>
+                <li>
+                    <a href="#understanding-generators" aria-label="Understanding Generators">Understanding Generators</a><ul>
+                        
+                <li>
+                    <a href="#writing-generator-functions" aria-label="Writing Generator Functions">Writing Generator Functions</a></li>
+                <li>
+                    <a href="#generator-expressions" aria-label="Generator Expressions">Generator Expressions</a></li>
+                <li>
+                    <a href="#creating-custom-generators" aria-label="Creating Custom Generators">Creating Custom Generators</a></li>
+                <li>
+                    <a href="#advanced-generator-features" aria-label="Advanced Generator Features">Advanced Generator Features</a></li></ul>
+                </li>
+                <li>
+                    <a href="#practicle-applications-and-examples" aria-label="Practicle Applications and Examples">Practicle Applications and Examples</a></li>
+                <li>
+                    <a href="#common-practices-and-anti-patterns" aria-label="Common Practices and Anti-Patterns">Common Practices and Anti-Patterns</a></li>
+                <li>
+                    <a href="#performance-considerations" aria-label="Performance Considerations">Performance Considerations</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications.</p>
+<p>An iterator is an object that enables a programmer to traverse through all the elements of a collection, such as lists, tuples, dictionaries, and sets. This object adheres to the iterator protocol, which requires it to implement two specific methods: <strong>iter</strong>() and <strong>next</strong>(). The <strong>iter</strong>() method returns the iterator object itself and is used in conjunction with loops, like for and while, to repeatedly fetch the next element. The <strong>next</strong>() method, on the other hand, provides the next element of the collection and raises a StopIteration exception when there are no more elements to return. This mechanism underlies many of Python&rsquo;s built-in functions and constructs, such as loops and comprehensions, allowing them to operate transparently over collections of data.</p>
+<p>Generators are a type of iterable in Python that are used to generate a sequence of values. Unlike regular functions that return a single value and terminate, generators yield multiple values sequentially, pausing after each yield and resuming from where they left off. This is accomplished using the yield keyword. Generators are particularly useful for creating efficient, clean code, especially when dealing with large data sets or streams, as they provide values on demand and consume memory only when generating values. By maintaining state in local variables and control flow, generators facilitate complex computations without sacrificing readability or efficiency of the code. Essentially, they allow programmers to write a function that can send back a value and later resume to pick up where it left off.</p>
+<h2 id="overview-of-iter-and-next-functions">Overview of <code>iter()</code> and <code>next()</code> functions<a hidden class="anchor" aria-hidden="true" href="#overview-of-iter-and-next-functions">#</a></h2>
+<p>The <code>iter()</code> and <code>next()</code> functions are fundamental to the functionality of iterators in Python, facilitating the process of iterating over iterable objects such as lists, tuples, and dictionaries. Understanding how these functions operate is key to leveraging Python&rsquo;s iteration capabilities more effectively.</p>
+<h3 id="iter-function"><code>iter()</code> Function<a hidden class="anchor" aria-hidden="true" href="#iter-function">#</a></h3>
+<p>The <code>iter()</code> function is used to obtain an iterator from an iterable object. An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a loop. Common iterables include all types of collections, such as lists, tuples, and dictionaries. To make an object iterable, it typically needs to implement the <code>__iter__()</code> method, which returns an iterator object. This iterator object then processes the elements of the iterable one at a time.</p>
+<p>When iter(object) is called, Python internally calls object.<code>__iter__()</code> and returns an iterator for that object. If the object does not implement <code>__iter__()</code> but has a <code>__getitem__()</code> method, Python creates an iterator that attempts to fetch elements sequentially starting from index 0, raising an IndexError when no more elements are available.</p>
+<h3 id="next-function"><code>next()</code> Function<a hidden class="anchor" aria-hidden="true" href="#next-function">#</a></h3>
+<p>Once an iterator is obtained using <code>iter()</code>, the <code>next()</code> function is used to sequentially access elements from the iterator. Calling <code>next(iterator)</code> internally invokes the iterator&rsquo;s <code>__next__()</code> method, which returns the next available item from the iterable. If no more elements are available, it raises the StopIteration exception, signaling that the iteration is complete.</p>
+<p>The use of <code>next()</code> is essential in low-level operations where control over the iteration process is required. This function allows developers to manually control the iteration, fetching the next element only when needed. This is particularly useful in scenarios where the iteration may need to be paused, altered, or conditionally advanced.</p>
+<h3 id="practical-usage">Practical Usage<a hidden class="anchor" aria-hidden="true" href="#practical-usage">#</a></h3>
+<p>Together, <code>iter()</code> and <code>next()</code> offer a powerful mechanism for custom iteration without the need for explicit loop constructs like for or while. This can lead to more expressive, efficient, and readable code, especially in situations involving advanced iteration patterns or when integrating with other Python features like generators and coroutines.</p>
+<p>By using these functions, Python programmers can create highly efficient and lazy evaluations of potentially large datasets, manage streams of data in real-time, or implement custom iteration logic that goes beyond traditional loop constructs. Thus, understanding and using <code>iter()</code> and <code>next()</code> not only enriches one&rsquo;s grasp of Python&rsquo;s iteration model but also opens up possibilities for writing more pythonic and performance-oriented code.</p>
+<h2 id="deep-dive-into-iterators">Deep Dive into Iterators<a hidden class="anchor" aria-hidden="true" href="#deep-dive-into-iterators">#</a></h2>
+<p>One of the key features of iterators is their ability to maintain state. When you create an iterator, it internally keeps track of its position within the iterable. Each call to <strong>next</strong>() advances the position and returns the corresponding element. This statefulness allows iterators to handle large datasets efficiently, as they only process elements on demand and do not require the entire dataset to be loaded into memory.</p>
+<p>Iterators are designed to be lazy, meaning they only compute and retrieve elements as they are needed. This on-demand way of fetching items makes iterators particularly useful for working with large datasets or data streams where you don&rsquo;t want to consume resources for the entire data at once.</p>
+<h3 id="creating-custom-iterators">Creating Custom Iterators<a hidden class="anchor" aria-hidden="true" href="#creating-custom-iterators">#</a></h3>
+<p>Creating custom iterators can be very beneficial for handling specific types of data processing or implementing complex iteration logic. Here are some important use-cases for custom iterators in Python, with implementation examples for each.</p>
+<h4 id="1-iterating-over-infinite-sequences">1. Iterating Over Infinite Sequences<a hidden class="anchor" aria-hidden="true" href="#1-iterating-over-infinite-sequences">#</a></h4>
+<p>One common use-case is to generate infinite sequences, which can be particularly useful for generating an endless supply of data on-demand.</p>
+
+
+
+
+
+
+<pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">InfiniteCounter</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">start</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">current_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">current_value</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Usage:</span>
+</span></span><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="n">InfiniteCounter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</span></span></code></pre></div></pre>
+<p>This iterator starts counting from the specified number and increments indefinitely until the loop is manually stopped.</p>
+<h4 id="2-accessing-tree-like-data-structure">2. Accessing Tree-like Data Structure<a hidden class="anchor" aria-hidden="true" href="#2-accessing-tree-like-data-structure">#</a></h4>
+<p>Navigating complex data structures, like trees, can benefit from custom iterators that yield elements in a specified traversal order.</p>
+
+
+
+
+
+
+<pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">key</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BinaryTree</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_order_traversal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">in_order_traversal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_order_traversal</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_order_traversal</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Usage:</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tree</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span></span></code></pre></div></pre>
+<p>This example yields nodes&rsquo; values in in-order (left-root-right) sequence.</p>
+<h4 id="3-reading-large-files-line-by-line">3. Reading Large Files Line by Line<a hidden class="anchor" aria-hidden="true" href="#3-reading-large-files-line-by-line">#</a></h4>
+<p>Reading large files efficiently without loading the entire file into memory can be achieved with a custom iterator.</p>
+
+
+
+
+
+
+<pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FileIterator</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">StopIteration</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Usage:</span>
+</span></span><span class="line"><span class="cl"><span class="n">file_iter</span> <span class="o">=</span> <span class="n">FileIterator</span><span class="p">(</span><span class="s1">&#39;example.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_iter</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></span></code></pre></div></pre>
+<p>This iterator reads a file line by line, making it ideal for processing large text files.</p>
+<h4 id="4-cycling-through-a-collection">4. Cycling Through a Collection<a hidden class="anchor" aria-hidden="true" href="#4-cycling-through-a-collection">#</a></h4>
+<p>Cycling through a list or any collection repeatedly can be useful for simulations or games.</p>
+
+
+
+
+
+
+<pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Cycle</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">StopIteration</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Usage:</span>
+</span></span><span class="line"><span class="cl"><span class="n">cycler</span> <span class="o">=</span> <span class="n">Cycle</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">cycler</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>  <span class="c1"># Prints: 1 2 3 1 2 3 1 2 3 1</span>
+</span></span></code></pre></div></pre>
+<p>This iterator repeats the elements in the list indefinitely.</p>
+<p>These examples showcase how custom iterators can be tailored to fit specific needs, enhancing the functionality and efficiency of Python applications.</p>
+<h3 id="pythons-built-in-iterators">Python&rsquo;s built-in iterators<a hidden class="anchor" aria-hidden="true" href="#pythons-built-in-iterators">#</a></h3>
+<h3 id="common-uses">Common Uses<a hidden class="anchor" aria-hidden="true" href="#common-uses">#</a></h3>
+<h2 id="understanding-generators">Understanding Generators<a hidden class="anchor" aria-hidden="true" href="#understanding-generators">#</a></h2>
+<!-- raw HTML omitted -->
+<h3 id="writing-generator-functions">Writing Generator Functions<a hidden class="anchor" aria-hidden="true" href="#writing-generator-functions">#</a></h3>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="generator-expressions">Generator Expressions<a hidden class="anchor" aria-hidden="true" href="#generator-expressions">#</a></h3>
+<p>&lt;syntax and examples comprared to list comprehensions</p>
+<h3 id="creating-custom-generators">Creating Custom Generators<a hidden class="anchor" aria-hidden="true" href="#creating-custom-generators">#</a></h3>
+<h3 id="advanced-generator-features">Advanced Generator Features<a hidden class="anchor" aria-hidden="true" href="#advanced-generator-features">#</a></h3>
+<!-- raw HTML omitted -->
+<p>&lt;use of <code>yield from</code>&gt;
+<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="practicle-applications-and-examples">Practicle Applications and Examples<a hidden class="anchor" aria-hidden="true" href="#practicle-applications-and-examples">#</a></h2>
+<!-- raw HTML omitted -->
+<h2 id="common-practices-and-anti-patterns">Common Practices and Anti-Patterns<a hidden class="anchor" aria-hidden="true" href="#common-practices-and-anti-patterns">#</a></h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="performance-considerations">Performance Considerations<a hidden class="anchor" aria-hidden="true" href="#performance-considerations">#</a></h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/pythondecorators/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Decorators in Python</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+
+
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="http://localhost:1313/">Francisco Mendonca&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
