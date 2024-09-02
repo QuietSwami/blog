@@ -1,0 +1,23 @@
+.notices {
+    margin: 1em 0;
+}
+
+.notice {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    font-family: Arial, sans-serif;
+}
+
+.notice-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.notice-warning strong {
+    font-weight: bold;
+}

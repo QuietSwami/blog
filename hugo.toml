@@ -1,7 +1,7 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = "Francisco Mendonca's Blog"
-theme = 'PaperMod'
+theme = ['hugo-notice', 'PaperMod']
 
 
 [params]
@@ -18,11 +18,11 @@ ShowRssButtonInSectionTermList = true
 ShowAllPagesInArchive = true
 ShowPageNums = true
 ShowToc = true
+custom_css = ["css/style.css"]
 
 
 [params.homeInfoParams]
 Title = "Francisco Mendonca"
-Content = "Can be Info, links, about..."
 
 [[params.socialIcons]]
 name = "GitHub"

@@ -6,8 +6,38 @@
     <description>Recent content in Posts on Francisco Mendonca&#39;s Blog</description>
     <generator>Hugo -- 0.125.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 May 2024 16:35:06 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 02 Sep 2024 13:13:49 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Federation</title>
+      <link>http://localhost:1313/posts/federation/</link>
+      <pubDate>Mon, 02 Sep 2024 13:13:49 +0200</pubDate>
+      <guid>http://localhost:1313/posts/federation/</guid>
+      <description> Warning
+This post is a draft and may not be accurate or complete. </description>
+    </item>
+    <item>
+      <title>Data Cooperatives</title>
+      <link>http://localhost:1313/posts/data_cooperatives/</link>
+      <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
+      <guid>http://localhost:1313/posts/data_cooperatives/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Publishing Drafts</title>
+      <link>http://localhost:1313/posts/publishingdrafts/</link>
+      <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
+      <guid>http://localhost:1313/posts/publishingdrafts/</guid>
+      <description>There is no reason to publish drafts.</description>
+    </item>
+    <item>
+      <title>Mastering Docker Swarm Pt.1</title>
+      <link>http://localhost:1313/posts/mastering_docker_swarm_pt._1/</link>
+      <pubDate>Mon, 17 Jun 2024 11:56:50 +0200</pubDate>
+      <guid>http://localhost:1313/posts/mastering_docker_swarm_pt._1/</guid>
+      <description>Docker Swarm integrates clustering seamlessly with Docker, connecting Docker Daemons into a single, unified network. In a Docker Swarm cluster, one (or more) node is designated as the master (or manager), while the rest are worker nodes. The master node is responsible for distributing services across the worker nodes and ensuring that the desired state of each service is maintained.
+For this demonstration, I have created a Docker Swarm cluster on AWS, consisting of 3 master nodes and 3 worker nodes.</description>
+    </item>
     <item>
       <title>Generators and Iterators</title>
       <link>http://localhost:1313/posts/generators-and-iterators/</link>
