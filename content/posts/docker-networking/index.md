@@ -6,6 +6,7 @@ date = 2024-09-19T11:56:50+02:00
 
 This tutorial focuses on two of the many networks Docker offers: Bridge and Overlay. These networks serve similar purposes in different scenarios.
 
+## Docker Bridge Networks
 In Docker, a Bridge Network is the default. If no network is specified when deploying a container, Docker assumes it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the host's networks—and the outside world.
 
 ![Docker Bridge Network](images/docker-bridge-net.png)
@@ -16,15 +17,19 @@ The isolation of the network is great, but there are times when we need to acces
 
 However, there’s a limitation we need to consider: Bridge networks are restricted to a single Docker host (like our local machine). This means that if you want to connect containers deployed on multiple machines, you'll run into challenges—this is where Docker Swarm comes in.
 
-### Docker Swarm
+## Docker Swarm
 
-Docker Swarm is Docker’s native clustering and orchestration tool, allowing you to manage a cluster of Docker engines as a single virtual system. It enables you to deploy and manage a multi-container application across multiple hosts, providing scalability, high availability, and load balancing.
+Docker Swarm is Docker’s native clustering and orchestration tool, allowing you to manage a cluster of Docker engines as a single virtual system. It enables you to deploy and manage a multi-container application across multiple hosts, providing scalability, high availability, and load balancing.Within Swarm, you can define Docker services, which represent a long-running container or a group of containers that work together to perform a specific task. Services allow you to easily scale your application, manage replicas, and ensure consistent deployment across your cluster.
+
+![How services work on Docker Swarm](images/docker-swarm-service.png)
 
 Now, because Docker Swarm manages multiple hosts, we need a way for containers running on different hosts to communicate with each other. This is where overlay networks come into play.
 
-### Overlay Networks
+## Overlay Networks
 
 Overlay networks solve this issue by creating a virtual network that spans across all the hosts in the Swarm. This allows containers attached to the same overlay network to communicate with each other, regardless of the physical host they’re running on.
+
+![Overlay Network](images/docker-overlay-net.png)
 
 For example, if you have a web application running on one host and a database service on another, both connected to the same overlay network, they can seamlessly communicate as if they were on the same local network.
 
@@ -60,6 +65,8 @@ Before diving into each solution, let's chat about why you might want to enable 
 ## Container Networking
 
 Let’s start with a solution by creating two separate bridge networks. We'll place one container on each network and use a third container connected to both networks as a communication channel or "gateway." This container will facilitate communication between the two isolated networks.
+
+![Communication Between Networks](images/docker-bridge-exercise.png)
 
 ### Messaging Queues
 

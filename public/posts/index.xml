@@ -10,11 +10,12 @@
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Quick Docker Networking Tutorial</title>
-      <link>http://localhost:1313/posts/docker-networking/dockernetworking/</link>
+      <link>http://localhost:1313/posts/docker-networking/</link>
       <pubDate>Thu, 19 Sep 2024 11:56:50 +0200</pubDate>
-      <guid>http://localhost:1313/posts/docker-networking/dockernetworking/</guid>
-      <description>&lt;p&gt;This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.&lt;/p&gt;
-&lt;p&gt;In Docker, a Bridge Network is the default network. If no network is specified, Docker will assume that, when a container is deployed, it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the hosts (the machine where the container are running) networks - and the outside world.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/posts/docker-networking/</guid>
+      <description>&lt;p&gt;This tutorial focuses on two of the many networks Docker offers: Bridge and Overlay. These networks serve similar purposes in different scenarios.&lt;/p&gt;
+&lt;h2 id=&#34;docker-bridge-networks&#34;&gt;Docker Bridge Networks&lt;/h2&gt;
+&lt;p&gt;In Docker, a Bridge Network is the default. If no network is specified when deploying a container, Docker assumes it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the host&amp;rsquo;s networks—and the outside world.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Federation</title>
