@@ -13,22 +13,23 @@
       <link>http://localhost:1313/posts/federation/</link>
       <pubDate>Mon, 02 Sep 2024 13:13:49 +0200</pubDate>
       <guid>http://localhost:1313/posts/federation/</guid>
-      <description> Warning
-This post is a draft and may not be accurate or complete. </description>
+      <description>Warning
+This post is a draft and may not be accurate or complete. For the past few weeks I&amp;rsquo;ve been interested in exploring how data cooperatives can be extended by forming a Federation. And how these federations can be organized. Later, I&amp;rsquo;ll present in more detail what type of architecture I propose to implement this, but for now, let&amp;rsquo;s have a look on the idea of Federation of Data Cooperatives</description>
     </item>
     <item>
       <title>Data Cooperatives</title>
       <link>http://localhost:1313/posts/data_cooperatives/</link>
       <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
       <guid>http://localhost:1313/posts/data_cooperatives/</guid>
-      <description></description>
+      <description>Warning
+This post is a draft and may not be accurate or complete. This note will focus on the reason why data cooperatives are needed (with a focus on agriculture), some architecture suggestions for their application, and why I think Dataspaces, as developed by IDSA might be a good solution for it.</description>
     </item>
     <item>
       <title>Publishing Drafts</title>
       <link>http://localhost:1313/posts/publishingdrafts/</link>
       <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
       <guid>http://localhost:1313/posts/publishingdrafts/</guid>
-      <description>There is no reason to publish drafts.</description>
+      <description>Normally, there is no reason to publish drafts. I mean, who wants to display to the world their unfinished, unpolished and unverfied work? Aparently me. The idea was borned after I read Learning in Public by Shawn Wang. The premise is simple: while the majority of us learn in private, learning by publicaly displaying what you know about a subject, and submitting yourself to the wider public critisism has the ability of actually improving how deep you learn.</description>
     </item>
     <item>
       <title>Mastering Docker Swarm Pt.1</title>
