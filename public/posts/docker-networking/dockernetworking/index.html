@@ -10,7 +10,7 @@
 <meta name="description" content="This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.
 In Docker, a Bridge Network is the default network. If no network is specified, Docker will assume that, when a container is deployed, it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the hosts (the machine where the container are running) networks - and the outside world.">
 <meta name="author" content="Francisco Mendonca">
-<link rel="canonical" href="http://localhost:1313/posts/dockernetworking/">
+<link rel="canonical" href="http://localhost:1313/posts/docker-networking/dockernetworking/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
@@ -19,7 +19,7 @@ In Docker, a Bridge Network is the default network. If no network is specified, 
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/dockernetworking/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/docker-networking/dockernetworking/">
 <noscript>
     <style>
         #theme-toggle,
@@ -60,7 +60,7 @@ In Docker, a Bridge Network is the default network. If no network is specified, 
 <meta property="og:description" content="This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.
 In Docker, a Bridge Network is the default network. If no network is specified, Docker will assume that, when a container is deployed, it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the hosts (the machine where the container are running) networks - and the outside world." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/dockernetworking/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/docker-networking/dockernetworking/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-09-19T11:56:50+02:00" />
 <meta property="article:modified_time" content="2024-09-19T11:56:50+02:00" />
 
@@ -85,7 +85,7 @@ In Docker, a Bridge Network is the default network. If no network is specified, 
       "@type": "ListItem",
       "position":  2 ,
       "name": "Quick Docker Networking Tutorial",
-      "item": "http://localhost:1313/posts/dockernetworking/"
+      "item": "http://localhost:1313/posts/docker-networking/dockernetworking/"
     }
   ]
 }
@@ -111,7 +111,7 @@ In Docker, a Bridge Network is the default network. If no network is specified, 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/dockernetworking/"
+    "@id": "http://localhost:1313/posts/docker-networking/dockernetworking/"
   },
   "publisher": {
     "@type": "Organization",
@@ -231,7 +231,7 @@ In Docker, a Bridge Network is the default network. If no network is specified, 
 
   <div class="post-content"><p>This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.</p>
 <p>In Docker, a Bridge Network is the default network. If no network is specified, Docker will assume that, when a container is deployed, it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the hosts (the machine where the container are running) networks - and the outside world.</p>
-<p><img loading="lazy" src="images/docker-bridge-net.png" alt="Image"  />
+<p><img loading="lazy" src="images/docker-bridge-net.png" alt="Docker Bridge Network"  />
 </p>
 <p>To communicate, containers connected to a bridge network can communicate using the container&rsquo;s name as hostname. This means that, if we deploy a container by specifying the flag <code>--name</code> or <code>-n</code>, to communicate we can use the name given to the container as the URL, instead of having to use the container&rsquo;s IP address in the network. Docker allows this by internally handling the DNS resolution of these names, to ensure that containers can find each other using known names and not IPs.</p>
 <p>The isolation of the network is great and all but sometimes we need to access external networks, or at least, we might need to be able to access the application running inside of the container. For this we can open ports in the network by using the flag <code>-p</code> or <code>--publish</code>, and specifying the target port we want to open <code>HOST:CONTAINER</code>.</p>

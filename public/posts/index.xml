@@ -10,12 +10,267 @@
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Quick Docker Networking Tutorial</title>
-      <link>http://localhost:1313/posts/dockernetworking/</link>
+      <link>http://localhost:1313/posts/docker-networking/dockernetworking/</link>
       <pubDate>Thu, 19 Sep 2024 11:56:50 +0200</pubDate>
-      <guid>http://localhost:1313/posts/dockernetworking/</guid>
-      <description>&lt;p&gt;``s
-This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.&lt;/p&gt;
+      <guid>http://localhost:1313/posts/docker-networking/dockernetworking/</guid>
+      <description>&lt;p&gt;This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.&lt;/p&gt;
 &lt;p&gt;In Docker, a Bridge Network is the default network. If no network is specified, Docker will assume that, when a container is deployed, it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the hosts (the machine where the container are running) networks - and the outside world.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Federation</title>
+      <link>http://localhost:1313/posts/federation/</link>
+      <pubDate>Mon, 02 Sep 2024 13:13:49 +0200</pubDate>
+      <guid>http://localhost:1313/posts/federation/</guid>
+      <description>&lt;style type=&#34;text/css&#34;&gt;
+     
+    .notice {
+        --title-color: #fff;
+        --title-background-color: #6be;
+        --content-color: #444;
+        --content-background-color: #e7f2fa;
+    }
+
+    .notice.info {
+        --title-background-color: #fb7;
+        --content-background-color: #fec;
+    }
+
+    .notice.tip {
+        --title-background-color: #5a5;
+        --content-background-color: #efe;
+    }
+
+    .notice.warning {
+        --title-background-color: #c33;
+        --content-background-color: #fee;
+    }
+
+     
+    @media (prefers-color-scheme:dark) {
+        .notice {
+            --title-color: #fff;
+            --title-background-color: #069;
+            --content-color: #ddd;
+            --content-background-color: #023;
+        }
+
+        .notice.info {
+            --title-background-color: #a50;
+            --content-background-color: #420;
+        }
+
+        .notice.tip {
+            --title-background-color: #363;
+            --content-background-color: #121;
+        }
+
+        .notice.warning {
+            --title-background-color: #800;
+            --content-background-color: #400;
+        }
+    }
+
+    body.dark .notice {
+        --title-color: #fff;
+        --title-background-color: #069;
+        --content-color: #ddd;
+        --content-background-color: #023;
+    }
+
+    body.dark .notice.info {
+        --title-background-color: #a50;
+        --content-background-color: #420;
+    }
+
+    body.dark .notice.tip {
+        --title-background-color: #363;
+        --content-background-color: #121;
+    }
+
+    body.dark .notice.warning {
+        --title-background-color: #800;
+        --content-background-color: #400;
+    }
+
+     
+    .notice {
+        padding: 18px;
+        line-height: 24px;
+        margin-bottom: 24px;
+        border-radius: 4px;
+        color: var(--content-color);
+        background: var(--content-background-color);
+    }
+
+    .notice p:last-child {
+        margin-bottom: 0
+    }
+
+     
+    .notice-title {
+        margin: -18px -18px 12px;
+        padding: 4px 18px;
+        border-radius: 4px 4px 0 0;
+        font-weight: 700;
+        color: var(--title-color);
+        background: var(--title-background-color);
+    }
+
+     
+    .icon-notice {
+        display: inline-flex;
+        align-self: center;
+        margin-right: 8px;
+    }
+
+    .icon-notice img,
+    .icon-notice svg {
+        height: 1em;
+        width: 1em;
+        fill: currentColor;
+    }
+
+    .icon-notice img,
+    .icon-notice.baseline svg {
+        top: .125em;
+        position: relative;
+    }
+&lt;/style&gt;&lt;div class=&#34;notice warning&#34; &gt;
+    &lt;p class=&#34;notice-title&#34;&gt;
+        &lt;span class=&#34;icon-notice baseline&#34;&gt;
+            &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;126 76.5 300 300&#34;&gt;
+  &lt;path d=&#34;M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z&#34;/&gt;
+&lt;/svg&gt;
+
+        &lt;/span&gt;Warning&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Cooperatives</title>
+      <link>http://localhost:1313/posts/data_cooperatives/</link>
+      <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
+      <guid>http://localhost:1313/posts/data_cooperatives/</guid>
+      <description>&lt;style type=&#34;text/css&#34;&gt;
+     
+    .notice {
+        --title-color: #fff;
+        --title-background-color: #6be;
+        --content-color: #444;
+        --content-background-color: #e7f2fa;
+    }
+
+    .notice.info {
+        --title-background-color: #fb7;
+        --content-background-color: #fec;
+    }
+
+    .notice.tip {
+        --title-background-color: #5a5;
+        --content-background-color: #efe;
+    }
+
+    .notice.warning {
+        --title-background-color: #c33;
+        --content-background-color: #fee;
+    }
+
+     
+    @media (prefers-color-scheme:dark) {
+        .notice {
+            --title-color: #fff;
+            --title-background-color: #069;
+            --content-color: #ddd;
+            --content-background-color: #023;
+        }
+
+        .notice.info {
+            --title-background-color: #a50;
+            --content-background-color: #420;
+        }
+
+        .notice.tip {
+            --title-background-color: #363;
+            --content-background-color: #121;
+        }
+
+        .notice.warning {
+            --title-background-color: #800;
+            --content-background-color: #400;
+        }
+    }
+
+    body.dark .notice {
+        --title-color: #fff;
+        --title-background-color: #069;
+        --content-color: #ddd;
+        --content-background-color: #023;
+    }
+
+    body.dark .notice.info {
+        --title-background-color: #a50;
+        --content-background-color: #420;
+    }
+
+    body.dark .notice.tip {
+        --title-background-color: #363;
+        --content-background-color: #121;
+    }
+
+    body.dark .notice.warning {
+        --title-background-color: #800;
+        --content-background-color: #400;
+    }
+
+     
+    .notice {
+        padding: 18px;
+        line-height: 24px;
+        margin-bottom: 24px;
+        border-radius: 4px;
+        color: var(--content-color);
+        background: var(--content-background-color);
+    }
+
+    .notice p:last-child {
+        margin-bottom: 0
+    }
+
+     
+    .notice-title {
+        margin: -18px -18px 12px;
+        padding: 4px 18px;
+        border-radius: 4px 4px 0 0;
+        font-weight: 700;
+        color: var(--title-color);
+        background: var(--title-background-color);
+    }
+
+     
+    .icon-notice {
+        display: inline-flex;
+        align-self: center;
+        margin-right: 8px;
+    }
+
+    .icon-notice img,
+    .icon-notice svg {
+        height: 1em;
+        width: 1em;
+        fill: currentColor;
+    }
+
+    .icon-notice img,
+    .icon-notice.baseline svg {
+        top: .125em;
+        position: relative;
+    }
+&lt;/style&gt;&lt;div class=&#34;notice warning&#34; &gt;
+    &lt;p class=&#34;notice-title&#34;&gt;
+        &lt;span class=&#34;icon-notice baseline&#34;&gt;
+            &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;126 76.5 300 300&#34;&gt;
+  &lt;path d=&#34;M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z&#34;/&gt;
+&lt;/svg&gt;
+
+        &lt;/span&gt;Warning&lt;/p&gt;</description>
     </item>
     <item>
       <title>Publishing Drafts</title>
@@ -23,6 +278,21 @@ This tutorial focuses on two of the several networks Docker has at our disposal,
       <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
       <guid>http://localhost:1313/posts/publishingdrafts/</guid>
       <description>&lt;p&gt;Normally, there is no reason to publish drafts. I mean, who wants to display to the world their unfinished, unpolished and unverfied work? Aparently me. The idea was borned after I read &lt;a href=&#34;https://www.swyx.io/learn-in-public&#34;&gt;Learning in Public&lt;/a&gt; by Shawn Wang. The premise is simple: while the majority of us learn in private, learning by publicaly displaying what you know about a subject, and submitting yourself to the wider public critisism has the ability of actually improving how &lt;em&gt;deep&lt;/em&gt; you learn. Because there&amp;rsquo;s always someone out there who knows more than you.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mastering Docker Swarm Pt.1</title>
+      <link>http://localhost:1313/posts/mastering_docker_swarm_pt._1/</link>
+      <pubDate>Mon, 17 Jun 2024 11:56:50 +0200</pubDate>
+      <guid>http://localhost:1313/posts/mastering_docker_swarm_pt._1/</guid>
+      <description>&lt;p&gt;Docker Swarm integrates clustering seamlessly with Docker, connecting Docker Daemons into a single, unified network. In a Docker Swarm cluster, one (or more) node is designated as the master (or manager), while the rest are worker nodes. The master node is responsible for distributing services across the worker nodes and ensuring that the desired state of each service is maintained.&lt;/p&gt;
+&lt;p&gt;For this demonstration, I have created a Docker Swarm cluster on AWS, consisting of 3 master nodes and 3 worker nodes. This setup is designed to test High Availability within Docker Swarm. By having multiple master nodes, the cluster remains operational even if one master node fails, ensuring continuous service availability.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Generators and Iterators</title>
+      <link>http://localhost:1313/posts/generators-and-iterators/</link>
+      <pubDate>Mon, 20 May 2024 16:35:06 +0200</pubDate>
+      <guid>http://localhost:1313/posts/generators-and-iterators/</guid>
+      <description>&lt;p&gt;Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Decorators in Python</title>

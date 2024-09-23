@@ -148,7 +148,7 @@ Previously, we've seen how to communicate between tasks in a swarm. Each node in
 
 When a node receives a request for a published port, but the target container is not on that node, the routing mesh forwards the request to a node that is running the desired service instance. Since all nodes have a replica of the DNS records for the ingress network, they can efficiently redirect the traffic to the appropriate service instance.
 
-{{ $image := resources.Get "images/sunset.jpg" }}
+{{ $image := resources.Get "images/docker-ingress-network.jpg" }}
 
 
 ### Benefits of Docker's Ingress Load Balancer
