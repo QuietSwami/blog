@@ -1,9 +1,8 @@
 +++
 title = 'Quick Docker Networking Tutorial'
 date = 2024-09-19T11:56:50+02:00
-draft = False
 +++
-
+``s
 This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.
 
 In Docker, a Bridge Network is the default network. If no network is specified, Docker will assume that, when a container is deployed, it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the hosts (the machine where the container are running) networks - and the outside world.

@@ -4,62 +4,42 @@
     <title>Posts on Francisco Mendonca&#39;s Blog</title>
     <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on Francisco Mendonca&#39;s Blog</description>
-    <generator>Hugo -- 0.125.3</generator>
+    <generator>Hugo -- 0.134.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Sep 2024 13:13:49 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 19 Sep 2024 11:56:50 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Federation</title>
-      <link>http://localhost:1313/posts/federation/</link>
-      <pubDate>Mon, 02 Sep 2024 13:13:49 +0200</pubDate>
-      <guid>http://localhost:1313/posts/federation/</guid>
-      <description> Warning
-This post is a draft and may not be accurate or complete. </description>
-    </item>
-    <item>
-      <title>Data Cooperatives</title>
-      <link>http://localhost:1313/posts/data_cooperatives/</link>
-      <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
-      <guid>http://localhost:1313/posts/data_cooperatives/</guid>
-      <description></description>
+      <title>Quick Docker Networking Tutorial</title>
+      <link>http://localhost:1313/posts/dockernetworking/</link>
+      <pubDate>Thu, 19 Sep 2024 11:56:50 +0200</pubDate>
+      <guid>http://localhost:1313/posts/dockernetworking/</guid>
+      <description>&lt;p&gt;``s
+This tutorial focuses on two of the several networks Docker has at our disposal, Bridge and Overlay. These two networks allow for the similar uses under different cases.&lt;/p&gt;
+&lt;p&gt;In Docker, a Bridge Network is the default network. If no network is specified, Docker will assume that, when a container is deployed, it will use the default bridge network. The goal of the bridge network is to allow containers to communicate while remaining isolated from the hosts (the machine where the container are running) networks - and the outside world.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Publishing Drafts</title>
       <link>http://localhost:1313/posts/publishingdrafts/</link>
       <pubDate>Mon, 02 Sep 2024 13:13:33 +0200</pubDate>
       <guid>http://localhost:1313/posts/publishingdrafts/</guid>
-      <description>There is no reason to publish drafts.</description>
-    </item>
-    <item>
-      <title>Mastering Docker Swarm Pt.1</title>
-      <link>http://localhost:1313/posts/mastering_docker_swarm_pt._1/</link>
-      <pubDate>Mon, 17 Jun 2024 11:56:50 +0200</pubDate>
-      <guid>http://localhost:1313/posts/mastering_docker_swarm_pt._1/</guid>
-      <description>Docker Swarm integrates clustering seamlessly with Docker, connecting Docker Daemons into a single, unified network. In a Docker Swarm cluster, one (or more) node is designated as the master (or manager), while the rest are worker nodes. The master node is responsible for distributing services across the worker nodes and ensuring that the desired state of each service is maintained.
-For this demonstration, I have created a Docker Swarm cluster on AWS, consisting of 3 master nodes and 3 worker nodes.</description>
-    </item>
-    <item>
-      <title>Generators and Iterators</title>
-      <link>http://localhost:1313/posts/generators-and-iterators/</link>
-      <pubDate>Mon, 20 May 2024 16:35:06 +0200</pubDate>
-      <guid>http://localhost:1313/posts/generators-and-iterators/</guid>
-      <description>Python stands out as an exceptionally user-friendly programming language, offering straightforward fundamental concepts ideal for newcomers to coding. However, it also boasts several advanced features that enhance performance significantly. Among these features, Generators and Iterators are particularly noteworthy within the Python ecosystem. These tools are crucial for optimizing memory usage and implementing lazy evaluation, allowing programmers to handle large data sets more efficiently without the need for extensive memory allocation. Generators and Iterators enable the creation of efficient code that is not only resource-friendly but also cleaner and more readable, demonstrating Python’s versatility from basic scripting to handling complex, large-scale applications.</description>
+      <description>&lt;p&gt;Normally, there is no reason to publish drafts. I mean, who wants to display to the world their unfinished, unpolished and unverfied work? Aparently me. The idea was borned after I read &lt;a href=&#34;https://www.swyx.io/learn-in-public&#34;&gt;Learning in Public&lt;/a&gt; by Shawn Wang. The premise is simple: while the majority of us learn in private, learning by publicaly displaying what you know about a subject, and submitting yourself to the wider public critisism has the ability of actually improving how &lt;em&gt;deep&lt;/em&gt; you learn. Because there&amp;rsquo;s always someone out there who knows more than you.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Decorators in Python</title>
       <link>http://localhost:1313/posts/pythondecorators/</link>
       <pubDate>Mon, 06 May 2024 21:21:51 +0200</pubDate>
       <guid>http://localhost:1313/posts/pythondecorators/</guid>
-      <description>Python is renowned for its exceptional versatility, making it ideal for diverse applications, from web development to data science. In this blog post, we&amp;rsquo;re diving into a powerful feature known as Decorators. Although I had not explored Decorators for quite some time, I decided it was finally time to thoroughly understand and master them.
-Understanding Nested Functions in Python Before diving into decorators, it&amp;rsquo;s helpful to understand nested functions in Python.</description>
+      <description>&lt;p&gt;Python is renowned for its exceptional versatility, making it ideal for diverse applications, from web development to data science. In this blog post, we&amp;rsquo;re diving into a powerful feature known as Decorators. Although I had not explored Decorators for quite some time, I decided it was finally time to thoroughly understand and master them.&lt;/p&gt;
+&lt;h2 id=&#34;understanding-nested-functions-in-python&#34;&gt;Understanding Nested Functions in Python&lt;/h2&gt;
+&lt;p&gt;Before diving into decorators, it&amp;rsquo;s helpful to understand nested functions in Python. A nested function is defined within another function, and it can access variables from the enclosing scope. Here’s an example to illustrate this:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Introduction</title>
       <link>http://localhost:1313/posts/introduction/</link>
       <pubDate>Wed, 24 Apr 2024 11:54:29 +0200</pubDate>
       <guid>http://localhost:1313/posts/introduction/</guid>
-      <description>After one year in my PhD, I accumulated a lot of notes, both hand-written or written using tools like Obsidian, Notion, or similar. I&amp;rsquo;ve loss track of most notes I took, and do not actively keep track of most. I thought a blog was exactly what I needed, somewhere to discuss more in depth some of the work I&amp;rsquo;m developing, and other projects I come across.
-I hope this blog comes to serve some use to at least me - a place where I can develop further certain ideas, skills, and other tid bits I might find interesting.</description>
+      <description>&lt;p&gt;After one year in my PhD, I accumulated a lot of notes, both hand-written or written using tools like Obsidian, Notion, or similar. I&amp;rsquo;ve loss track of most notes I took, and do not actively keep track of most. I thought a blog was exactly what I needed, somewhere to discuss more in depth some of the work I&amp;rsquo;m developing, and other projects I come across.&lt;/p&gt;
+&lt;p&gt;I hope this blog comes to serve some use to at least me - a place where I can develop further certain ideas, skills, and other tid bits I might find interesting.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
